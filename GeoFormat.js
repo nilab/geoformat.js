@@ -6,6 +6,7 @@
   Dec.11.2013
   
   Copyright (c) 2013 by Naoki Ueda
+  Copyright (c) 2013 by NI-Lab.
   Published under the 2-clause BSD license.
   See http://openlayers.org/dev/license.txt for the full text of the license
   
@@ -14,6 +15,7 @@ var GeoFormat = function(var0, var1, var2, var3, var4, var5 ) {
 	this.valid = false;
 	this.lat;
 	this.lon;
+	this.lng;
 	
 	var geoprint = function(format, val, isLat){
 		var calFactor = 10000000000;
@@ -175,18 +177,22 @@ var GeoFormat = function(var0, var1, var2, var3, var4, var5 ) {
 	if(!isNaN(var0) && !isNaN(var1) && isNaN(var2) && isNaN(var3) && isNaN(var4) && isNaN(var5)){
 		this.lat = new latlonvalue(var0 - 0,true);
 		this.lon = new latlonvalue(var1 - 0,false);
+		this.lng = this.lon;
 		this.valid = true;
 	}else if(!isNaN(var0) && !isNaN(var1) && !isNaN(var2) && !isNaN(var3) && isNaN(var4) && isNaN(var5)){
 		this.lat = new latlonvalue(((var0-0)<0?(-1):1) * (Math.abs(var0 - 0) + (Math.abs(var1 - 0))/60 - 0),true);
 		this.lon = new latlonvalue(((var2-0)<0?(-1):1) * (Math.abs(var2 - 0) + (Math.abs(var3 - 0))/60 - 0),false);
+		this.lng = this.lon;
 		this.valid = true;
 	}else if(!isNaN(var0) && !isNaN(var1) && !isNaN(var2) && !isNaN(var3) && !isNaN(var4) && !isNaN(var5)){
 		this.lat = new latlonvalue(((var0-0)<0?(-1):1) * (Math.abs(var0 - 0) + Math.abs((var1 - 0)/60) + Math.abs((var2 - 0)/3600 - 0)),true);
 		this.lon = new latlonvalue(((var3-0)<0?(-1):1) * (Math.abs(var3 - 0) + Math.abs((var4 - 0)/60) + Math.abs((var5 - 0)/3600 - 0)),false);
+		this.lng = this.lon;
 		this.valid = true;
 	}else{
 		this.lat = null;
 		this.lon = null;
+		this.lng = this.lon;
 		this.valid = false;
 	}
 	
